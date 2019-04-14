@@ -12,21 +12,35 @@
         <h1>Articles</h1>
         <section class = 'articles'>
             <ul>
-                <li> Lorem ipsum, dolor sit amet consectetur adipisicing elit.  </li>
-                <li> Lorem ipsum, dolor sit amet consectetur adipisicing elit.  </li>
-                <li> Lorem ipsum, dolor sit amet consectetur adipisicing elit.  </li>
-                <li> Lorem ipsum, dolor sit amet consectetur adipisicing elit.  </li>
+                <?php foreach ($articles as $article) : ?>
+                <li><?php echo $article['id']. '.- ' . $article['article']; ?> </li>
+                <?php endforeach; ?>
             </ul>
         </section>
         <section class = 'pagination'>
             <ul>
-                <!-- <li class = 'disabled'> <a href ='#'>&laquo;</a></li> -->
-                <li class = 'disabled'>&laquo;</a></li>
-                <li class = 'active'> <a href="#">1</a> </li>
-                <li> <a href="#">2</a> </li>
-                <li> <a href="#">3</a> </li>
-                <li> <a href="#">4</a> </li>
-                <li> <a href="#">&raquo;</a></li>
+                <!-- Deactivate backwards button -->
+                <?php if ($page == 1): ?>
+                    <li class = 'disabled'> &laquo;</li>
+                <?php else: ?>   
+                    <li> <a href ="?page=<?php echo $page - 1?>">&laquo;</a></li> 
+                <?php endif ?>
+                <!-- Show the pages, and active the active page -->
+                <?php 
+                for ($i=1; $i <= $numberOfPages; $i++) { 
+                    if ($page == $i) {
+                        echo "<li class = 'active'> <a href=?page=$i> $i</a> </li>";
+                    } else {
+                        echo "<li> <a href=?page=$i> $i</a> </li>";
+                    }    
+                }
+                ?>
+                <!-- Deactivate fordwards button -->
+                <?php if ($page == $numberOfPages): ?>
+                    <li class = 'disabled'> &raquo;</li>
+                <?php else: ?>   
+                    <li> <a href ="?page=<?php echo $page + 1?>">&raquo;</a></li> 
+                <?php endif ?>
             </ul>
         </section>
 	</div>

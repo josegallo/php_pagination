@@ -11,7 +11,7 @@ try {
 //get the page id
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 //number of posts per page
-$postPerPage = 3;
+$postPerPage = 5;
 //number of post to show from
 $fromPostToShow = ($page > 1) ? ($page * $postPerPage - $postPerPage) : 0;
 //make SQL query and execute
@@ -20,6 +20,7 @@ $articles = $conn->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM articles
 $articles->execute();
 //get all the set of articles to show as array
 $articles = $articles->fetchall();
+// print_r($articles);
 
 //if there are not articles redirect to index
 if (!$articles) {
